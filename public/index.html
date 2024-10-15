@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cám ơn vì em đến 🌺</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffd1dc;
+            font-family: Arial, sans-serif;
+        }
+        #prompt {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffd1dc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+        #emailInput {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #ffccd5;
+        }
+        #buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-ok {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        .background-video {
+            position: absolute;
+            width: 16%;
+            height: auto;
+            z-index: 1;
+        }
+        .background-image {
+            position: absolute;
+            width: 20%;
+            height: auto;
+            z-index: 1;
+        }
+        #video-left {
+            top: 20%;
+            left: 10%;
+            transform: rotate(-8deg);
+        }
+        #video-right {
+            top: 20%;
+            right: 10%;
+            transform: rotate(8deg) scale(1.3);
+        }
+        #image-top {
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #video-bottom {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32%;
+            margin-bottom: -65px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" src="musicStandBy.mp3" loop></audio>
+
+    <video id="video-left" class="background-video" src="Em.mp4" muted autoplay loop controls></video>
+    <video id="video-right" class="background-video" src="soBeautiful.mp4" muted autoplay loop controls></video>
+    <img id="image-top" class="background-image" src="straightFace.jpg" alt="Top Image">
+    <video id="video-bottom" class="background-video" src="studyOtherSubjects.mp4" muted autoplay loop controls></video>
+    
+    <div id="prompt">
+        <h2>Tớ có bức thư này, liệu cậu có thể cho tớ xin email được khum? 👉👈</h2>
+        <input type="email" id="emailInput" placeholder="Em hãy click vào ô này đi, vì khi đó mọi thứ mới bắt đầu">
+        <div id="buttons">
+            <button class="btn btn-ok" id="sendEmailButton">Oki</button>
+            <button class="btn btn-cancel" onclick="goToVideo()">Thuii</button>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="direct.js"></script>
+
+    <script>
+        function goToVideo() {
+            window.location.href = "video.html";
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const backgroundMusic = document.getElementById("background-music");
+            backgroundMusic.volume = 0.8;
+        });
+
+        // Kích hoạt nhạc khi người dùng tương tác
+        window.addEventListener('click', () => {
+            const backgroundMusic = document.getElementById("background-music");
+            if (backgroundMusic.paused) {
+                backgroundMusic.play().catch(error => {
+                    console.error('Lỗi phát nhạc:', error);
+                });
+            }
+        });
+
+        // Gán sự kiện cho nút "Oki"
+        document.getElementById("sendEmailButton").addEventListener("click", sendMail);
+    </script>
+</body>
+</html>
